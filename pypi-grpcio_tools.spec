@@ -5,14 +5,12 @@
 #
 Name     : pypi-grpcio_tools
 Version  : 1.54.0
-Release  : 40
+Release  : 41
 URL      : https://files.pythonhosted.org/packages/e2/a9/4f4bdb13e414474de9ae770700e5450f8beb981282af171255c9d4cbed25/grpcio-tools-1.54.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/e2/a9/4f4bdb13e414474de9ae770700e5450f8beb981282af171255c9d4cbed25/grpcio-tools-1.54.0.tar.gz
 Summary  : Protobuf code generator for gRPC
 Group    : Development/Tools
 License  : Apache-2.0
-Requires: pypi-grpcio_tools-filemap = %{version}-%{release}
-Requires: pypi-grpcio_tools-lib = %{version}-%{release}
 Requires: pypi-grpcio_tools-python = %{version}-%{release}
 Requires: pypi-grpcio_tools-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
@@ -42,23 +40,6 @@ BuildRequires : pypi(setuptools)
         
         If you are installing locally...
 
-%package filemap
-Summary: filemap components for the pypi-grpcio_tools package.
-Group: Default
-
-%description filemap
-filemap components for the pypi-grpcio_tools package.
-
-
-%package lib
-Summary: lib components for the pypi-grpcio_tools package.
-Group: Libraries
-Requires: pypi-grpcio_tools-filemap = %{version}-%{release}
-
-%description lib
-lib components for the pypi-grpcio_tools package.
-
-
 %package python
 Summary: python components for the pypi-grpcio_tools package.
 Group: Default
@@ -71,7 +52,6 @@ python components for the pypi-grpcio_tools package.
 %package python3
 Summary: python3 components for the pypi-grpcio_tools package.
 Group: Default
-Requires: pypi-grpcio_tools-filemap = %{version}-%{release}
 Requires: python3-core
 Provides: pypi(grpcio_tools)
 Requires: pypi(grpcio)
@@ -94,15 +74,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1681832343
+export SOURCE_DATE_EPOCH=1683038506
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
@@ -135,17 +115,10 @@ popd
 %files
 %defattr(-,root,root,-)
 
-%files filemap
-%defattr(-,root,root,-)
-/usr/share/clear/filemap/filemap-pypi-grpcio_tools
-
-%files lib
-%defattr(-,root,root,-)
-/usr/share/clear/optimized-elf/other*
-
 %files python
 %defattr(-,root,root,-)
 
 %files python3
 %defattr(-,root,root,-)
+/V3/usr/lib/python3*/*
 /usr/lib/python3*/*
