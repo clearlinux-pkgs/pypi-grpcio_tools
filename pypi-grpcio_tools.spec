@@ -4,13 +4,14 @@
 # Using build pattern: distutils3
 #
 Name     : pypi-grpcio_tools
-Version  : 1.54.2
-Release  : 42
-URL      : https://files.pythonhosted.org/packages/b1/a9/db4538e727eb0d627a345ab99c22cab041db98aac1eadfbeadbccc0c4376/grpcio-tools-1.54.2.tar.gz
-Source0  : https://files.pythonhosted.org/packages/b1/a9/db4538e727eb0d627a345ab99c22cab041db98aac1eadfbeadbccc0c4376/grpcio-tools-1.54.2.tar.gz
+Version  : 1.55.0
+Release  : 43
+URL      : https://files.pythonhosted.org/packages/ab/57/0a02eb41926c19809e40217f2b8499243db77c683f6f8e24ee6a3d0c7407/grpcio-tools-1.55.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/ab/57/0a02eb41926c19809e40217f2b8499243db77c683f6f8e24ee6a3d0c7407/grpcio-tools-1.55.0.tar.gz
 Summary  : Protobuf code generator for gRPC
 Group    : Development/Tools
-License  : Apache-2.0
+License  : Apache-2.0 MIT
+Requires: pypi-grpcio_tools-license = %{version}-%{release}
 Requires: pypi-grpcio_tools-python = %{version}-%{release}
 Requires: pypi-grpcio_tools-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
@@ -39,6 +40,14 @@ BuildRequires : pypi(setuptools)
         
         If you are installing locally...
 
+%package license
+Summary: license components for the pypi-grpcio_tools package.
+Group: Default
+
+%description license
+license components for the pypi-grpcio_tools package.
+
+
 %package python
 Summary: python components for the pypi-grpcio_tools package.
 Group: Default
@@ -62,10 +71,10 @@ python3 components for the pypi-grpcio_tools package.
 
 
 %prep
-%setup -q -n grpcio-tools-1.54.2
-cd %{_builddir}/grpcio-tools-1.54.2
+%setup -q -n grpcio-tools-1.55.0
+cd %{_builddir}/grpcio-tools-1.55.0
 pushd ..
-cp -a grpcio-tools-1.54.2 buildavx2
+cp -a grpcio-tools-1.55.0 buildavx2
 popd
 
 %build
@@ -73,7 +82,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1684609912
+export SOURCE_DATE_EPOCH=1684867212
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -97,6 +106,8 @@ popd
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/pypi-grpcio_tools
+cp %{_builddir}/grpcio-tools-%{version}/third_party/utf8_range/LICENSE %{buildroot}/usr/share/package-licenses/pypi-grpcio_tools/252c7fd154ca740ae6f765d206fbd9119108a0e3 || :
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -113,6 +124,10 @@ popd
 
 %files
 %defattr(-,root,root,-)
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/pypi-grpcio_tools/252c7fd154ca740ae6f765d206fbd9119108a0e3
 
 %files python
 %defattr(-,root,root,-)
