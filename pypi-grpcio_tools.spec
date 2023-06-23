@@ -4,10 +4,10 @@
 # Using build pattern: distutils3
 #
 Name     : pypi-grpcio_tools
-Version  : 1.55.0
-Release  : 44
-URL      : https://files.pythonhosted.org/packages/ab/57/0a02eb41926c19809e40217f2b8499243db77c683f6f8e24ee6a3d0c7407/grpcio-tools-1.55.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/ab/57/0a02eb41926c19809e40217f2b8499243db77c683f6f8e24ee6a3d0c7407/grpcio-tools-1.55.0.tar.gz
+Version  : 1.56.0
+Release  : 45
+URL      : https://files.pythonhosted.org/packages/1b/3f/3a0133a85eef463f94e9e6fa49394f21e3cf8b7123422020d76e95418e25/grpcio-tools-1.56.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/1b/3f/3a0133a85eef463f94e9e6fa49394f21e3cf8b7123422020d76e95418e25/grpcio-tools-1.56.0.tar.gz
 Summary  : Protobuf code generator for gRPC
 Group    : Development/Tools
 License  : Apache-2.0 MIT
@@ -15,6 +15,7 @@ Requires: pypi-grpcio_tools-license = %{version}-%{release}
 Requires: pypi-grpcio_tools-python = %{version}-%{release}
 Requires: pypi-grpcio_tools-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
+BuildRequires : pypi(grpcio)
 BuildRequires : pypi(protobuf)
 BuildRequires : pypi(setuptools)
 # Suppress stripping binaries
@@ -71,10 +72,10 @@ python3 components for the pypi-grpcio_tools package.
 
 
 %prep
-%setup -q -n grpcio-tools-1.55.0
-cd %{_builddir}/grpcio-tools-1.55.0
+%setup -q -n grpcio-tools-1.56.0
+cd %{_builddir}/grpcio-tools-1.56.0
 pushd ..
-cp -a grpcio-tools-1.55.0 buildavx2
+cp -a grpcio-tools-1.56.0 buildavx2
 popd
 
 %build
@@ -82,7 +83,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1685558414
+export SOURCE_DATE_EPOCH=1687533750
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
