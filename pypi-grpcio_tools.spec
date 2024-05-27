@@ -6,10 +6,10 @@
 # autospec commit: 5905be9
 #
 Name     : pypi-grpcio_tools
-Version  : 1.62.2
-Release  : 58
-URL      : https://files.pythonhosted.org/packages/b1/09/dfb87373a34bf6ce3261d65f8fb102a163c850c72a3e84902777ed44aa1d/grpcio-tools-1.62.2.tar.gz
-Source0  : https://files.pythonhosted.org/packages/b1/09/dfb87373a34bf6ce3261d65f8fb102a163c850c72a3e84902777ed44aa1d/grpcio-tools-1.62.2.tar.gz
+Version  : 1.64.0
+Release  : 59
+URL      : https://files.pythonhosted.org/packages/9f/30/cd31c3a04814eb880d5e78cea768240c92fb5adaa158814c2b166356a0c6/grpcio_tools-1.64.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/9f/30/cd31c3a04814eb880d5e78cea768240c92fb5adaa158814c2b166356a0c6/grpcio_tools-1.64.0.tar.gz
 Summary  : Protobuf code generator for gRPC
 Group    : Development/Tools
 License  : Apache-2.0 MIT
@@ -23,6 +23,7 @@ BuildRequires : pypi(setuptools)
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
+Patch1: backport-llvm.patch
 
 %description
 gRPC Python Tools
@@ -63,18 +64,22 @@ python3 components for the pypi-grpcio_tools package.
 
 
 %prep
-%setup -q -n grpcio-tools-1.62.2
-cd %{_builddir}/grpcio-tools-1.62.2
+%setup -q -n grpcio_tools-1.64.0
+cd %{_builddir}/grpcio_tools-1.64.0
+%patch -P 1 -p1
 pushd ..
-cp -a grpcio-tools-1.62.2 buildavx2
+cp -a grpcio_tools-1.64.0 buildavx2
 popd
 
 %build
+## build_prepend content
+export GRPC_PYTHON_BUILD_SYSTEM_ABSL=1
+## build_prepend end
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1713538148
+export SOURCE_DATE_EPOCH=1716833938
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -93,6 +98,9 @@ export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
 pushd ../buildavx2/
+## build_prepend content
+export GRPC_PYTHON_BUILD_SYSTEM_ABSL=1
+## build_prepend end
 CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 "
@@ -119,7 +127,7 @@ LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-grpcio_tools
-cp %{_builddir}/grpcio-tools-%{version}/third_party/protobuf/third_party/utf8_range/LICENSE %{buildroot}/usr/share/package-licenses/pypi-grpcio_tools/252c7fd154ca740ae6f765d206fbd9119108a0e3 || :
+cp %{_builddir}/grpcio_tools-%{version}/third_party/protobuf/third_party/utf8_range/LICENSE %{buildroot}/usr/share/package-licenses/pypi-grpcio_tools/252c7fd154ca740ae6f765d206fbd9119108a0e3 || :
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
