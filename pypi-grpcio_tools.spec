@@ -6,10 +6,10 @@
 # autospec commit: f35655a
 #
 Name     : pypi-grpcio_tools
-Version  : 1.65.4
-Release  : 64
-URL      : https://files.pythonhosted.org/packages/5d/60/774bd9d621d5e43ab31952ee1090cc823be4413741d1bfd66bdcce4aebf5/grpcio_tools-1.65.4.tar.gz
-Source0  : https://files.pythonhosted.org/packages/5d/60/774bd9d621d5e43ab31952ee1090cc823be4413741d1bfd66bdcce4aebf5/grpcio_tools-1.65.4.tar.gz
+Version  : 1.66.0
+Release  : 65
+URL      : https://files.pythonhosted.org/packages/44/ec/c06f5446730961606b2f50c11dece57f01b48d047802c156ab636176e7a1/grpcio_tools-1.66.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/44/ec/c06f5446730961606b2f50c11dece57f01b48d047802c156ab636176e7a1/grpcio_tools-1.66.0.tar.gz
 Summary  : Protobuf code generator for gRPC
 Group    : Development/Tools
 License  : Apache-2.0 MIT
@@ -23,7 +23,7 @@ BuildRequires : pypi(setuptools)
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
-Patch1: backport-llvm.patch
+Patch1: llvm.patch
 
 %description
 gRPC Python Tools
@@ -64,11 +64,11 @@ python3 components for the pypi-grpcio_tools package.
 
 
 %prep
-%setup -q -n grpcio_tools-1.65.4
-cd %{_builddir}/grpcio_tools-1.65.4
+%setup -q -n grpcio_tools-1.66.0
+cd %{_builddir}/grpcio_tools-1.66.0
 %patch -P 1 -p1
 pushd ..
-cp -a grpcio_tools-1.65.4 buildavx2
+cp -a grpcio_tools-1.66.0 buildavx2
 popd
 
 %build
@@ -79,7 +79,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1722638894
+export SOURCE_DATE_EPOCH=1724424916
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
