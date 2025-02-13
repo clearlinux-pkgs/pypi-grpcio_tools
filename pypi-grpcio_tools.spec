@@ -7,7 +7,7 @@
 #
 Name     : pypi-grpcio_tools
 Version  : 1.70.0
-Release  : 71
+Release  : 72
 URL      : https://files.pythonhosted.org/packages/c1/fe/3adf1035c1f9e9243516530beae67e197f2acc17562ec75f03a0ba77fc55/grpcio_tools-1.70.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/c1/fe/3adf1035c1f9e9243516530beae67e197f2acc17562ec75f03a0ba77fc55/grpcio_tools-1.70.0.tar.gz
 Summary  : Protobuf code generator for gRPC
