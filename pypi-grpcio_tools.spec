@@ -6,13 +6,14 @@
 # autospec commit: 65cf152
 #
 Name     : pypi-grpcio_tools
-Version  : 1.72.1
-Release  : 75
-URL      : https://files.pythonhosted.org/packages/40/ed/4fa90629c410f8e07f9d9d6ab20fbf8e219540adc85ab2fa210ccdc59756/grpcio_tools-1.72.1.tar.gz
-Source0  : https://files.pythonhosted.org/packages/40/ed/4fa90629c410f8e07f9d9d6ab20fbf8e219540adc85ab2fa210ccdc59756/grpcio_tools-1.72.1.tar.gz
+Version  : 1.73.0
+Release  : 76
+URL      : https://files.pythonhosted.org/packages/0b/62/5f7d3a6d394a7d0cf94abaa93e8224b7cdbc0677bdf2caabd20a62d4f5cb/grpcio_tools-1.73.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/0b/62/5f7d3a6d394a7d0cf94abaa93e8224b7cdbc0677bdf2caabd20a62d4f5cb/grpcio_tools-1.73.0.tar.gz
 Summary  : Protobuf code generator for gRPC
 Group    : Development/Tools
 License  : Apache-2.0 MIT
+Requires: pypi-grpcio_tools-bin = %{version}-%{release}
 Requires: pypi-grpcio_tools-license = %{version}-%{release}
 Requires: pypi-grpcio_tools-python = %{version}-%{release}
 Requires: pypi-grpcio_tools-python3 = %{version}-%{release}
@@ -31,6 +32,15 @@ Package for gRPC Python tools.
 Supported Python Versions
 -------------------------
 Python >= 3.6
+
+%package bin
+Summary: bin components for the pypi-grpcio_tools package.
+Group: Binaries
+Requires: pypi-grpcio_tools-license = %{version}-%{release}
+
+%description bin
+bin components for the pypi-grpcio_tools package.
+
 
 %package license
 Summary: license components for the pypi-grpcio_tools package.
@@ -63,10 +73,10 @@ python3 components for the pypi-grpcio_tools package.
 
 
 %prep
-%setup -q -n grpcio_tools-1.72.1
-cd %{_builddir}/grpcio_tools-1.72.1
+%setup -q -n grpcio_tools-1.73.0
+cd %{_builddir}/grpcio_tools-1.73.0
 pushd ..
-cp -a grpcio_tools-1.72.1 buildavx2
+cp -a grpcio_tools-1.73.0 buildavx2
 popd
 
 %build
@@ -77,7 +87,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1748875975
+export SOURCE_DATE_EPOCH=1749571223
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -142,6 +152,10 @@ popd
 
 %files
 %defattr(-,root,root,-)
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/python-grpc-tools-protoc
 
 %files license
 %defattr(0644,root,root,0755)
