@@ -6,10 +6,10 @@
 # autospec commit: 65cf152
 #
 Name     : pypi-grpcio_tools
-Version  : 1.73.0
-Release  : 76
-URL      : https://files.pythonhosted.org/packages/0b/62/5f7d3a6d394a7d0cf94abaa93e8224b7cdbc0677bdf2caabd20a62d4f5cb/grpcio_tools-1.73.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/0b/62/5f7d3a6d394a7d0cf94abaa93e8224b7cdbc0677bdf2caabd20a62d4f5cb/grpcio_tools-1.73.0.tar.gz
+Version  : 1.73.1
+Release  : 77
+URL      : https://files.pythonhosted.org/packages/63/b6/b185a351b4b00df88a1c7558eb3bcc05a4f53c36071b84d4f8a4db53f105/grpcio_tools-1.73.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/63/b6/b185a351b4b00df88a1c7558eb3bcc05a4f53c36071b84d4f8a4db53f105/grpcio_tools-1.73.1.tar.gz
 Summary  : Protobuf code generator for gRPC
 Group    : Development/Tools
 License  : Apache-2.0 MIT
@@ -73,10 +73,10 @@ python3 components for the pypi-grpcio_tools package.
 
 
 %prep
-%setup -q -n grpcio_tools-1.73.0
-cd %{_builddir}/grpcio_tools-1.73.0
+%setup -q -n grpcio_tools-1.73.1
+cd %{_builddir}/grpcio_tools-1.73.1
 pushd ..
-cp -a grpcio_tools-1.73.0 buildavx2
+cp -a grpcio_tools-1.73.1 buildavx2
 popd
 
 %build
@@ -87,7 +87,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1749571223
+export SOURCE_DATE_EPOCH=1750961088
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
